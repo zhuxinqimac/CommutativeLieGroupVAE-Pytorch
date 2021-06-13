@@ -173,3 +173,14 @@ do
         --split=0
 done
 ```
+
+## Citation
+
+```
+@inproceedings{Xinqi_liegroupvae_icml21,
+author={Xinqi Zhu and Chang Xu and Dacheng Tao},
+title={Commutative Lie Group VAE for Disentanglement Learning},
+booktitle={ICML},
+year={2021}
+}
+```
