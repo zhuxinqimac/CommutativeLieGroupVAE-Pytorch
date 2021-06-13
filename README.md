@@ -1,5 +1,7 @@
 # CommutativeLieGroupVAE-Pytorch
 
+![architecture](./imgs/lie_vae.png)
+
 Code for our paper [Commutative Lie Group VAE for Disentanglement Learning](https://arxiv.org/abs/2106.03375).
 
 ## Abstract
