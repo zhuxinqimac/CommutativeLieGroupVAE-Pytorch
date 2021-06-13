@@ -62,6 +62,9 @@ Use --data-path to specify the directory during training.
 
 ## Training
 
+Pretrained checkpoints can be found
+[here](https://drive.google.com/drive/folders/1ttIqYkHk2jCJep4DNow5B5uF-S8uP_A5?usp=sharing).
+
 DSprites:
 ```
 forward=0.2
