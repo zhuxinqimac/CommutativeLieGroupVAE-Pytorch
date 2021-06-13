@@ -52,7 +52,7 @@ def set_to_loader(trainds, valds, args):
 def sprites(args):
     train_transform, test_transform = transforms[args.dataset](args)
     output_targets = False
-    ds = PairSprites(args.data_path, download=False, transform=train_transform, wrapping=True,
+    ds = PairSprites(args.data_path, download=True, transform=train_transform, wrapping=True,
                      output_targets=output_targets)
     return ds
 

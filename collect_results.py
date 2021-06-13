@@ -8,11 +8,11 @@
 
 # --- File Name: collect_results.py
 # --- Creation Date: 02-02-2021
-# --- Last Modified: Sun 18 Apr 2021 16:21:19 AEST
+# --- Last Modified: Sun 13 Jun 2021 16:37:14 AEST
 # --- Author: Xinqi Zhu
 # .<.<.<.<.<.<.<.<.<.<.<.<.<.<.<.<
 """
-Collect results from a directory.
+Collect lie_group_vae results from a directory.
 """
 
 import argparse
@@ -29,9 +29,6 @@ import re
 from collections import OrderedDict
 
 # Metrics entries of interest.
-# If not shown here, means all entries of the metrics are of interest.
-# moi = {'tpl': ['sum_dist'], 'fvm': ['eval_acc', 'act_dim'], 'mig': ['discrete_mig']}
-# moi = {'tpl': ['sum_dist'], 'fvm': ['eval_acc', 'act_dim'], 'tpl_large': ['sum_dist'], 'tpl_b4': ['sum_dist']}
 moi = ['fac', 'fac_dim', 'beta', 'mig', 'dci_info',
        'dci_dis', 'dci_comp', 'mod', 'explicit', 'sap', 'fl']
 

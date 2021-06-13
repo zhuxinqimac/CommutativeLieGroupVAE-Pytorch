@@ -25,9 +25,12 @@ performance without extra constraints.
 
 ## Requirements
 
-* Python == 3.6.12
+* python == 3.6.12
 * Numpy == 1.19.2
-* PyTorch == 1.7.1
+* pytorch == 1.7.1
+* tensorboard == 2.3.0
+* tqdm == 4.54.1
+* h5py == 2.8.0
 * Our code is based on
 [this](https://github.com/MattPainter01/UnsupervisedActionEstimation)
 repository, thus has the same following structure:
@@ -38,3 +41,133 @@ repository, thus has the same following structure:
   * main.py: Defines the command line args to run training and executes the trainer.
   * trainer.py: Sets up parameters for training, optimisers etc.
   * training_loop.py: Defines the model independent training logic.
+We use Anaconda for package management.
+
+## Preparing datasets
+
+**DSprites**
+The training code will download the dataset
+(dsprites_ndarray_co1sh3sc6or40x32y32_64x64.npz)
+and convert it to img.npy file automatically (see
+datasets/dsprites.py).
+Just specify where (a directory) to store the downloaded dataset with
+--data-path flag.
+
+**3DShapes**
+Download 3dshapes.h5 file from [here](https://github.com/deepmind/3d-shapes)
+into a directory.
+Use --data-path to specify the directory during training.
+
+## Training
+
+DSprites:
+```
+forward=0.2
+hes=40
+rec=0.1
+com=0
+for i in 0 1 2 3 4 5 6 7 8 9
+do
+    CUDA_VISIBLE_DEVICES=0 \
+    python main.py \
+        --model=lie_group \
+        --epochs=70 \
+        --batch-size=256 \
+        --latents 10 \
+        --learning-rate=1e-4 \
+        --subgroup_sizes_ls '[100]' \
+        --subspace_sizes_ls '[10]' \
+        --lie_alg_init_scale 0.001 \
+        --hy_hes ${hes} \
+        --hy_rec ${rec} \
+        --hy_commute ${com} \
+        --forward_eg_prob=${forward} \
+        --recons_loss_type=bce \
+        --log-path=/path/to/results/lie_group_dsp_1mul100_rec${rec}_com${com}_hes${hes}_for${forward}_init0001 \
+        --data-path=/path/to/dsprites_dir \
+        --dataset=dsprites \
+        --eval_data_path=/path/to/dsprites_dir \
+        --eval_dataset=dsprites \
+        --split=0
+done
+```
+
+3DShapes:
+```
+forward=0.2
+hes=20
+rec=0.1
+com=0
+for i in 0 1 2 3 4 5 6 7 8 9
+do
+    CUDA_VISIBLE_DEVICES=1 \
+    python main.py \
+        --model=lie_group \
+        --epochs=70 \
+        --batch-size=256 \
+        --latents 10 \
+        --learning-rate=1e-4 \
+        --subgroup_sizes_ls '[400]' \
+        --subspace_sizes_ls '[10]' \
+        --lie_alg_init_scale 0.001 \
+        --hy_hes ${hes} \
+        --hy_rec ${rec} \
+        --hy_commute ${com} \
+        --forward_eg_prob=${forward} \
+        --recons_loss_type=l2 \
+        --log-path=/path/to/results/CommutativeLieGroupVAE-Pytorch/lie_group_3ds_1mul400_rec${rec}_com${com}_hes${hes}_for${forward}_init0001 \
+        --data-path=/path/to/3dshapes_dir \
+        --dataset=shapes3d \
+        --eval_data_path=/path/to/3dshapes_dir \
+        --eval_dataset=shapes3d \
+        --split=0
+done
+```
+
+Recorded values and visualizations can be explored with tensorboard.
+
+## Collect results
+
+To collect results (metrics with mean and std) in a directory
+of multiple models, we can run:
+```
+python collect_results.py \
+    --in_dir /path/to/model_results \
+    --result_file /path/to/model_results/aggregated_results.csv \
+    --config_variables '[model, dataset, latents, subgroup_sizes_ls, subspace_sizes_ls, lie_alg_init_scale, hy_rec, hy_commute, hy_hes, forward_eg_prob, recons_loss_type]'
+```
+
+## Evaluation
+To evaluate a checkpoint, run code (an example, where
+the --log-path contains the target checkpoint):
+```
+forward=0.2
+hes=20
+rec=0.1
+com=0
+for i in 0
+do
+    CUDA_VISIBLE_DEVICES=1 \
+    python main.py \
+        --evaluate=True \
+        --model=lie_group \
+        --epochs=70 \
+        --batch-size=256 \
+        --latents 10 \
+        --learning-rate=1e-4 \
+        --subgroup_sizes_ls '[400]' \
+        --subspace_sizes_ls '[10]' \
+        --lie_alg_init_scale 0.001 \
+        --hy_hes ${hes} \
+        --hy_rec ${rec} \
+        --hy_commute ${com} \
+        --forward_eg_prob=${forward} \
+        --recons_loss_type=l2 \
+        --log-path=/path/to/results/CommutativeLieGroupVAE-Pytorch/lie_group_3ds_1mul400_rec${rec}_com${com}_hes${hes}_for${forward}_init0001/version_${i} \
+        --data-path=/path/to/3dshapes_dir \
+        --dataset=shapes3d \
+        --eval_data_path=/path/to/3dshapes_dir \
+        --eval_dataset=shapes3d \
+        --split=0
+done
+```
