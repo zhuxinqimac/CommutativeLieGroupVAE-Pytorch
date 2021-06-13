@@ -31,10 +31,10 @@ performance without extra constraints.
 * Our code is based on
 [this](https://github.com/MattPainter01/UnsupervisedActionEstimation)
 repository, thus has the same following structure:
-- datasets: Stores PyTorch datasets and code to initialise them.
-- logger: Stores tensorboard logging and image generation code.
-- metrics: Stores all disentanglement metrics.
-- models: Stores all models used.
-- main.py: Defines the command line args to run training and executes the trainer.
-- trainer.py: Sets up parameters for training, optimisers etc.
-- training_loop.py: Defines the model independent training logic.
+  * datasets: Stores PyTorch datasets and code to initialise them.
+  * logger: Stores tensorboard logging and image generation code.
+  * metrics: Stores all disentanglement metrics.
+  * models: Stores all models used.
+  * main.py: Defines the command line args to run training and executes the trainer.
+  * trainer.py: Sets up parameters for training, optimisers etc.
+  * training_loop.py: Defines the model independent training logic.
