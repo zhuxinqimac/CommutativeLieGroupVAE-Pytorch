@@ -27,11 +27,11 @@ performance without extra constraints.
 
 ## Conference Poster
 
-![poster](https://github.com/zhuxinqimac/CommutativeLieGroupVAE-Pytorch/blob/main/imgs/Xinqi_poster.pdf?raw=true)
+![poster](https://github.com/zhuxinqimac/CommutativeLieGroupVAE-Pytorch/blob/main/imgs/Xinqi_poster.png?raw=true)
 
 ## Video Presentation
 
-[![lie-group-vae](https://github.com/zhuxinqimac/zhuxinqimac.github.io/files/icml21-video-thumbnail.png)](https://recorder-v3.slideslive.com/?share=38302&s=656ce8dd-35cd-4d7f-86c5-83d208e0e1dd)
+[![lie-group-vae](https://github.com/zhuxinqimac/zhuxinqimac.github.io/blob/master/files/icml21-video-thumbnail.png)](https://recorder-v3.slideslive.com/?share=38302&s=656ce8dd-35cd-4d7f-86c5-83d208e0e1dd)
 
 ## Requirements
 
