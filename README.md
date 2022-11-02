@@ -31,7 +31,7 @@ performance without extra constraints.
 
 ## Video Presentation
 
-[![lie-group-vae](https://github.com/zhuxinqimac/zhuxinqimac.github.io/blob/master/files/icml21-video-thumbnail.png)](https://recorder-v3.slideslive.com/?share=38302&s=656ce8dd-35cd-4d7f-86c5-83d208e0e1dd)
+[![lie-group-vae](https://github.com/zhuxinqimac/zhuxinqimac.github.io/blob/master/files/icml21-video-thumbnail.png)](https://www.youtube.com/watch?v=vo0MHTu5ppU&ab_channel=XinqiZhu)
 
 ## Requirements
 
